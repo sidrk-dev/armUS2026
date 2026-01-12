@@ -1,0 +1,1 @@
+# ライブラリのフォルダを自分のPCの Documents/Arduino/librariesにコピーしてコンパイルしてください

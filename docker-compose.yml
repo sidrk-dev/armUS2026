@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  karura_dev:
+    build: .
+    image: karura_arm:latest
+    container_name: karura_dev
+
+    # Enable TTY and stdin for interactive usage
+    tty: true
+    stdin_open: true
+
+    # Network configuration - host mode for ROS2 DDS discovery
+    network_mode: host
+
+    # Volumes to map source code and X11 into the container
+    volumes:
+      # Source code mount
+      - .:/root/ws_karura/src/Arm2026
+
+      # X11 socket for GUI (Linux/WSL2)
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # For VcXsrv on Windows, we use DISPLAY env var instead
+
+      # Environment variables for display (GUI) and ROS2
+    environment:
+      # Display configuration
+      # For WSL2 with VcXsrv: set DISPLAY before running docker-compose
+      # Example: export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - LIBGL_ALWAYS_INDIRECT=1
+
+      # ROS2 configuration
+      - ROS_DOMAIN_ID=0
+
+    # Privileged mode for hardware access (USB/CAN)
+    privileged: true
+
+    # Device mapping for USB Serial (Pico)
+    # These devices are created when you attach USB via usbipd on Windows
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/ttyACM1:/dev/ttyACM1
+
+    # Build and start bash
+    command: >
+      bash -c "
+        source /opt/ros/humble/setup.bash &&
+        cd /root/ws_karura &&
+        colcon build --symlink-install &&
+        source install/setup.bash &&
+        echo '=== Karura Arm Development Container ===' &&
+        echo 'Workspace: /root/ws_karura' &&
+        echo 'Source:    /root/ws_karura/src/Arm2026' &&
+        echo '' &&
+        echo 'Quick commands:' &&
+        echo '  ros2 launch karura_arm_moveit_config demo.launch.py' &&
+        echo '  ros2 run send_target_joint_degrees send_target_joint_degrees' &&
+        echo '  ros2 run serial_comm Arm_serial' &&
+        echo '' &&
+        /bin/bash
+      "
+
+  # Optional: Separate container for serial communication only
+  # Useful when you want to run MoveIt headless and serial separately
+  karura_serial:
+    build: .
+    image: karura_arm:latest
+    container_name: karura_serial
+    profiles:
+      - serial-only
+
+    tty: true
+    stdin_open: true
+    network_mode: host
+    privileged: true
+
+    volumes:
+      - .:/root/ws_karura/src/Arm2026
+
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/ttyACM1:/dev/ttyACM1
+
+    command: >
+      bash -c "
+        source /opt/ros/humble/setup.bash &&
+        cd /root/ws_karura &&
+        source install/setup.bash 2>/dev/null || colcon build --symlink-install && source install/setup.bash &&
+        ros2 run serial_comm Arm_serial
+      "

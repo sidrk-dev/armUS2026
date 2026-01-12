@@ -1,0 +1,31 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: karura_arm_description
+    relative_path: urdf/karura_arm_2026.xacro
+  srdf:
+    relative_path: config/karura_arm_description.srdf
+  package_settings:
+    author_name: yujiro onishi
+    author_email: yujiro5828@gmail.com
+    generated_timestamp: 1738573050
+  control_xacro:
+    command:
+      - position
+      - velocity
+      - effort
+    state:
+      - position
+      - velocity
+      - effort
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+      - velocity
+      - effort
+    state:
+      - position
+      - velocity
+      - effort

@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.env
+
+# C++ / Arduino / build systems
+build/
+install/
+log/
+*.elf
+*.hex
+*.bin
+*.map
+*.uf2
+
+# ROS 2
+COLCON_IGNORE
+ament_build_metadata
+src/
+# Note: keeping src/ generally if it's a workspace, but usually we just ignore build/install/log
+
+# Pycharm / VSCode
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store

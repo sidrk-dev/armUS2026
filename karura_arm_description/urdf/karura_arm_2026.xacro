@@ -1,0 +1,167 @@
+<?xml version="1.0" ?>
+<robot name="karura_arm_2026" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find karura_arm_description)/urdf/materials.xacro" />
+<!--<xacro:include filename="$(find-pkg-share karura_arm_description)/urdf/karura_arm_2026.trans" />-->
+<xacro:include filename="$(find karura_arm_description)/urdf/karura_arm_2026.gazebo" />
+
+
+<!--<link name="base_footprint"/>
+<joint name="base_footprint_to_base_link" type="fixed">
+  <parent link="base_footprint"/>
+  <child  link="base_link"/>
+  <origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+</joint>-->
+  
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0 -0.0019605224387384294 0.0" rpy="0 0 0"/>
+    <mass value="1.7352517537055798"/>
+    <inertia ixx="0.004346" iyy="0.04982" izz="0.04566" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link_1">
+  <inertial>
+    <origin xyz="-0.024999999999999994 0.05627611655184509 6.490807891168515e-14" rpy="0 0 0"/>
+    <mass value="0.957947254679481"/>
+    <inertia ixx="0.002655" iyy="0.001032" izz="0.002259" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link_2">
+  <inertial>
+    <origin xyz="-0.015000000000000022 0.1749999999994843 -0.303108891324537" rpy="0 0 0"/>
+    <mass value="3.19374966681729"/>
+    <inertia ixx="0.261378" iyy="0.195396" izz="0.066461" ixy="-0.0" iyz="0.111661" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.085 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.085 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link_3">
+  <inertial>
+    <origin xyz="-0.014999999999999975 9.865630157046557e-05 0.188870154036672" rpy="0 0 0"/>
+    <mass value="1.8940346462606914"/>
+    <inertia ixx="0.061057" iyy="0.060769" izz="0.001029" ixy="0.0" iyz="-1e-05" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 -0.435 0.606218" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 -0.435 0.606218" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link_4">
+  <inertial>
+    <origin xyz="1.2177238384314393e-13 -0.015000000000000013 0.03485142850381961" rpy="0 0 0"/>
+    <mass value="0.8015274480326815"/>
+    <inertia ixx="0.00167" iyy="0.001777" izz="0.000591" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.015 -0.45 0.076218" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.015 -0.45 0.076218" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link_5">
+  <inertial>
+    <origin xyz="-0.024999999999999963 -5.551115123125783e-17 0.037127522044594984" rpy="0 0 0"/>
+    <mass value="0.6090530995059226"/>
+    <inertia ixx="0.000476" iyy="0.000765" izz="0.000552" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.01 -0.435 -0.008782" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.01 -0.435 -0.008782" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link_6">
+  <inertial>
+    <origin xyz="-0.0031976744186046173 -5.551115123125783e-17 0.01959324060670692" rpy="0 0 0"/>
+    <mass value="0.5804999999999999"/>
+    <inertia ixx="0.000285" iyy="0.001672" izz="0.001542" ixy="-0.0" iyz="0.0" ixz="5.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.015 -0.435 -0.078782" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.015 -0.435 -0.078782" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://karura_arm_description/meshes/link_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+
+
+
+</robot>
