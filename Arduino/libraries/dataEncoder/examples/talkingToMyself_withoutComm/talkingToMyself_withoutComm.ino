@@ -1,13 +1,13 @@
 /*
-  任意のデータをバイナリに変換し，元に戻すサンプルプログラム．
-  詳しい仕様はserialEncoder.h，serialDecoder.hの中身を見てください．
-  注)64bit型(uint64_t, int64_t, double)は内部で32bit型(uint32_t, int32_t, float)にキャストされて送信されます．
+  Sample program to convert arbitrary data to binary and back.
+  Please see serialEncoder.h and serialDecoder.h for detailed specifications.
+  Note: 64-bit types (uint64_t, int64_t, double) are cast to 32-bit types (uint32_t, int32_t, float) internally for transmission.
 */
 
 #include "dataEncoder.h"
 #include "dataDecoder.h"
 
-dataEncoder enc(0);  //引数はプロトコルのid．serialDecoder.hでは最大10個のプロトコルを使い分けることができる．
+dataEncoder enc(0);  // Argument is protocol ID. serialDecoder.h allows up to 10 protocols.
 dataDecoder dec;
 
 bool a = true;
@@ -21,7 +21,7 @@ char printBuf[128];
 void setup() {
   Serial.begin(115200);
   while (!Serial);
-  //<type>で型を決定し，第1引数でデータの並び順(数字が小さいほど前にセットされる)，第2引数でデータのポインタ，第3引数で送信するビット数(省略すると型のビット数になる)を渡す．
+  // Determine type with <type>. Arg 1: data order (smaller number first), Arg 2: data pointer, Arg 3: bits to transmit (defaults to type size if omitted).
   enc.append<bool>(0, &a);  
   enc.append<uint8_t>(1, &b);
   enc.append<int16_t>(2, &c, 9);
@@ -29,10 +29,10 @@ void setup() {
   enc.append<double>(4, &e);
   //enc.init();
   sprintf(printBuf, "initializing data: ");
-  //デコード中に書き換えが起こらないようにする．
+  // Prevent modification during decoding.
   while (dec.status != dataDecoder::WAITING);
   dec.status = dataDecoder::EDITING;
-  //init()でデコード側に送信データのプロトコルを送信する．init()の戻り値が送信すべきバイト数．
+  // init() sends the transmission data protocol to the decoder. init() returns bytes to send.
   for (uint8_t cnt = 0; cnt < enc.init(); cnt++) {
     dec.data[cnt] = enc.data[cnt];
     sprintf(printBuf, "%s%02x", printBuf, dec.data[cnt]);
@@ -61,7 +61,7 @@ void loop() {
     ;
   dec.status = dataDecoder::EDITING;
   sprintf(printBuf, "encoded binary data: ");
-  //送信データ，受信データはdata[]に格納されている．encode()の戻り値が送信すべきバイト数．
+  // Send/receive data is stored in data[]. encode() returns bytes to send.
   for (uint8_t cnt = 0; cnt < enc.encode(); cnt++) {
     dec.data[cnt] = enc.data[cnt];
     sprintf(printBuf, "%s%02x", printBuf, dec.data[cnt]);
@@ -69,7 +69,7 @@ void loop() {
   dec.status = dataDecoder::WAITING;
   Serial.println(printBuf);
   dec.decode();
-  //<type>で取り出すデータの型を指定．第1引数はプロトコルid,第2引数はデータの並び番号．
+  // Specify type to retrieve with <type>. Arg 1: protocol ID, Arg 2: data index.
   bool A = dec.decodedData<bool>(0, 0);
   uint8_t B = dec.decodedData<uint8_t>(0, 1);
   int16_t C = dec.decodedData<int16_t>(0, 2);

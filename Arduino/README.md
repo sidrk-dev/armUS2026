@@ -1,1 +1,1 @@
-# ライブラリのフォルダを自分のPCの Documents/Arduino/librariesにコピーしてコンパイルしてください
+# Please copy the "libraries" folder to your PC's "Documents/Arduino/libraries" directory and compile.

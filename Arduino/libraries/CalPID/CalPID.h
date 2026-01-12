@@ -12,7 +12,7 @@ private:
     double max_pid;
 
 public:
-    CalPID(double kp_, double ki_, double kd_,double dt, double max);//PIDの係数３つ（PDの場合でもI=0とかにして３つ）制御周期、、最大値
+    CalPID(double kp_, double ki_, double kd_,double dt, double max); // 3 PID coefficients (even for PD, set I=0), control cycle, max value.
     CalPID();
     void setParameter(double kp_, double ki_, double kd_);
     void setMaxValue(double max);
@@ -20,8 +20,8 @@ public:
     double calPID(double devia_present);
     double calPI(double devia_present);
     double calPD(double devia_present);
-    double calPI_D(double devia_present,double diff_value);//微分先行型PID
-    double calP_D(double devia_present,double diff_value);//微分先行型PD
+    double calPI_D(double devia_present,double diff_value); // PI-D (Derivative on Measurement) control.
+    double calP_D(double devia_present,double diff_value); // P-D (Derivative on Measurement) control.
     void resetIntegral();
 };
 

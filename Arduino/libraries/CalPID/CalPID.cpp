@@ -31,7 +31,7 @@ double CalPID::calPID(double devia_present)
 {
     double differential = (deviation_old - devia_present) / delta_t;
     if ((value_PID != max_pid) && (value_PID != -max_pid))
-    { //アンチワインドアップ（積分項固定式）
+    { // Anti-windup (Integral clamping)
         integral += (devia_present + deviation_old) * delta_t / 2;
     }
     value_PID = kp * devia_present + ki * integral - kd * differential;
@@ -52,7 +52,7 @@ double CalPID::calPID(double devia_present)
 double CalPID::calPI(double devia_present)
 {
     if (value_PID != max_pid && value_PID != -max_pid)
-    { //アンチワインドアップ（積分項固定式）
+    { // Anti-windup (Integral clamping)
         integral += (devia_present + deviation_old) * delta_t / 2;
     }
     value_PID = kp * devia_present + ki * integral;
@@ -106,7 +106,7 @@ double CalPID::calP_D(double devia_present, double diff_value)
 double CalPID::calPI_D(double devia_present, double diff_value)
 {
     if (value_PID != max_pid && value_PID != -max_pid)
-    { //アンチワインドアップ（積分項固定式）
+    { // Anti-windup (Integral clamping)
         integral += (devia_present + deviation_old) * delta_t / 2;
     }
     value_PID = kp * devia_present + ki * integral - kd * diff_value;

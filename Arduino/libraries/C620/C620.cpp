@@ -108,7 +108,7 @@ float C620::updatePID(int target_rpm) {
 }
 
 void C620::updatePID_rad(float target_rad_s) {
-  // rad/sで指定、出力軸の速度なのでギア比がかかっているのに注意
+  // Specified in rad/s. Note that this is the output shaft speed, so the gear ratio is applied.
   float target_rpm = (int) target_rad_s * GEAR_RATIO * 60 / (2*PI);
   this->updatePID(target_rpm);
 }

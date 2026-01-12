@@ -22,7 +22,7 @@ def generate_launch_description():
             ('image', 'front/image')
         ],
         parameters=[
-            {'reliability': 'reliable'},#best_effortで変更できる、確認済
+            {'reliability': 'reliable'}, # Can be changed to best_effort, confirmed
             {'history': 'keep_last'},
             {'depth': 10},
             {'device_id': LaunchConfiguration('front_id')},
@@ -42,7 +42,7 @@ def generate_launch_description():
             ('image', 'rear/image')
         ],
         parameters=[
-            {'reliability': 'reliable'},#best_effortで変更できる、確認済
+            {'reliability': 'reliable'}, # Can be changed to best_effort, confirmed
             {'history': 'keep_last'},
             {'depth': 10},
             {'device_id': LaunchConfiguration('rear_id')},
@@ -98,6 +98,6 @@ def generate_launch_description():
     ld.add_action(rear_cam_node)
     ld.add_action(rear_trans_node)
     ld.add_action(rear_qos_node)
-# 複数ノードを追加する場合は，configN,nodeNを作ってld.add_action(nodeN)?
+# To add multiple nodes, create configN, nodeN and use ld.add_action(nodeN)?
 
     return ld

@@ -70,6 +70,6 @@ def generate_launch_description():
     #ld.add_action(front_trans_node)
     ld.add_action(cam_2_node)
     #ld.add_action(rear_trans_node)
-# 複数ノードを追加する場合は，configN,nodeNを作ってld.add_action(nodeN)?
+# To add multiple nodes, create configN, nodeN and use ld.add_action(nodeN)?
 
     return ld

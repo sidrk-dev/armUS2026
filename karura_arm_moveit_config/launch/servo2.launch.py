@@ -32,15 +32,15 @@ def load_yaml(package_name, file_path):
 
 
 def generate_launch_description():
-    # --- MoveIt 設定（SRDF/kinematics等）。URDFは下で xacro→robot_description を作る ---
+    # --- MoveIt Config (SRDF/kinematics etc). URDF is created below via xacro -> robot_description ---
     moveit_config = (
         MoveItConfigsBuilder("karura_arm_2026", package_name="karura_arm_moveit_config")
-        # SRDF ファイル名が karura_arm_description.srdf なので明示指定して警告を抑制
+        # Explicitly specify SRDF filename as karura_arm_description.srdf to suppress warnings
         .robot_description_semantic(file_path="config/karura_arm_description.srdf")
         .to_moveit_configs()
     )
 
-    # --- description パッケージの xacro を展開して robot_description を生成 ---
+    # --- Generate robot_description by expanding xacro from the description package ---
     desc_share = get_package_share_directory("karura_arm_description")
     xacro_file = os.path.join(desc_share, "urdf", "karura_arm_2026.xacro")
     robot_description = {

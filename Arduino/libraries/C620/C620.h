@@ -7,9 +7,9 @@
 #include "CalPID.h"
 //#include <MsTimer2.h>
 
-#define GEAR_RATIO 38 //モーターの減速比 19*ベベルの減速比2
-#define STOP_THRESHOLD 5 //5RPM以下のときは止まっているとみなす 回り始め制御用
-#define START_CURRENT 0.5 //回り始めは回転と反対方向に50mA流す
+#define GEAR_RATIO 38 // Motor reduction ratio 19 * Bevel reduction ratio 2
+#define STOP_THRESHOLD 5 // Considered stopped if under 5 RPM. Used for start-up control.
+#define START_CURRENT 0.5 // Apply 0.5A (500mA) in the opposite direction at startup.
 
 class C620
 {
@@ -45,7 +45,7 @@ public:
     float readAngle();
     float readCurrent();
 
-    //以下、どちらかのPID計算関数をCalPIDのインスタンス作成時に指定した周期で実行する
+    // Execute one of the following PID calculation functions at the cycle specified when creating the CalPID instance.
     float updatePID(int target_rpm);
     void updatePID_rad(float target_rad_s);
     
@@ -54,7 +54,7 @@ public:
     void stopMotor();
     void setCANData(can_frame* frame);
 
-    //モーターへの出力はせずにセンサーの読み取りデータのみ更新する場合
+    // When updating only the sensor reading data without outputting to the motor.
     void update();
 };
 
