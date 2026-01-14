@@ -168,6 +168,18 @@ def generate_launch_description():
         output="screen",
     )
 
+    serial_node = Node(
+        package="serial_comm",
+        executable="Arm_serial",
+        name="Arm_serial",
+        output="screen",
+        parameters=[
+            {"port_pico1": "/dev/ttyACM0"},
+            {"port_pico2": "/dev/ttyACM1"},
+            {"enable_pico2": True}, 
+        ]
+    )
+
     return LaunchDescription(
         [
             rviz_node,
@@ -178,6 +190,7 @@ def generate_launch_description():
             servo_node,
             container,
             joint_array_translation,
-            static_tf
+            static_tf,
+            serial_node
         ]
     )

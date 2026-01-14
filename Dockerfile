@@ -1,4 +1,4 @@
-FROM ros:humble-desktop
+FROM osrf/ros:humble-desktop
 
 # Install essential build tools and dependencies
 RUN apt-get update && apt-get install -y \
@@ -9,15 +9,15 @@ RUN apt-get update && apt-get install -y \
     ros-humble-moveit \
     ros-humble-ros2-control \
     ros-humble-ros2-controllers \
+    ros-humble-moveit-visual-tools \
+    ros-humble-moveit-servo \
     ros-humble-xacro \
     ros-humble-joint-state-publisher-gui \
     ros-humble-robot-state-publisher \
-    # X11 and GUI support
     libgl1-mesa-glx \
     libgl1-mesa-dri \
     mesa-utils \
     x11-apps \
-    # Development tools
     vim \
     nano \
     htop \
